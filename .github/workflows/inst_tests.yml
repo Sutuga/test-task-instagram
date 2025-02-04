@@ -32,7 +32,6 @@ jobs:
           sudo apt update
           sudo apt install -y google-chrome-stable
           CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
-          sudo apt install -y chromedriver
 
       - name: Run Tests with Pytest
         run: pipenv run pytest --alluredir=allure-results
