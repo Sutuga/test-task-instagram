@@ -15,3 +15,6 @@ allure-pytest = "*"
 
 [requires]
 python_version = "3"
+
+[scripts]
+test_ci = "pipenv run pytest tests --alluredir=allure-results"

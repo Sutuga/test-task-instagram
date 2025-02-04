@@ -34,7 +34,7 @@ jobs:
           CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
 
       - name: Run Tests with Pytest
-        run: pipenv run pytest --alluredir=allure-results
+        run: pipenv run test_ci
 
       - name: Generate Allure Report
         run: |
