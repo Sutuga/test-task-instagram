@@ -35,11 +35,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      - name: Install Allure CLI
+      - name: Install Node.js and npm
         run: |
-          sudo apt-add-repository -y ppa:qameta/allure
-          sudo apt update
-          sudo apt install -y allure
+          sudo apt install -y nodejs
+          sudo apt install -y npm
+
+      - name: Install Allure CLI
+        run: npm install -g allure-commandline --save-dev
 
       - name: Run Tests with Pytest
         run: pipenv run test_ci
