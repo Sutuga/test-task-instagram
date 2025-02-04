@@ -35,9 +35,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
+      - name: Install Allure CLI
+        run: |
+          sudo apt-add-repository -y ppa:qameta/allure
+          sudo apt update
+          sudo apt install -y allure
+
       - name: Run Tests with Pytest
         run: pipenv run test_ci
-        continue-on-error: true
 
       - name: Generate Allure Report
         run: |
