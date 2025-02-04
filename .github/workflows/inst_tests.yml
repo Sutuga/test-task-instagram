@@ -1,0 +1,48 @@
+name: Run Automated Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.8'
+
+      - name: Install Pipenv
+        run: pip install pipenv
+
+      - name: Install Dependencies
+        run: pipenv install --dev
+
+      - name: Install Chrome and WebDriver
+        run: |
+          sudo apt update
+          sudo apt install -y google-chrome-stable
+          CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
+          sudo apt install -y chromedriver
+
+      - name: Run Tests with Pytest
+        run: pipenv run pytest --alluredir=allure-results
+
+      - name: Generate Allure Report
+        run: |
+          pipenv run allure generate allure-results -o allure-report --clean
+
+      - name: Upload Allure Report as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report
