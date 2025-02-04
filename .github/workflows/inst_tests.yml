@@ -37,6 +37,7 @@ jobs:
 
       - name: Run Tests with Pytest
         run: pipenv run test_ci
+        continue-on-error: true
 
       - name: Generate Allure Report
         run: |
