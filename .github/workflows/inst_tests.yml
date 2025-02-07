@@ -47,6 +47,7 @@ jobs:
         run: pipenv run test_ci
 
       - name: Check Allure Results
+        if: always()
         run: ls -la allure-results
 
       - name: Generate Allure Report
