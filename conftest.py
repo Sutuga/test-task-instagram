@@ -1,5 +1,3 @@
-"""provided basic functionality for tests"""
-
 import re
 import allure
 import pytest
@@ -14,14 +12,22 @@ def chrome_options():
     Return the chrome options
     """
     options = webdriver.ChromeOptions()
-    # options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option(
+        "prefs",
+        {"credentials_enable_service": False, "profile.password_manager_enabled": False},
+    )
     options.add_argument("--no-sandbox")
     options.add_argument("start-maximized")
     options.add_argument("--headless")  # Run Chrome in headless mode
     options.add_argument("--disable-dev-shm-usage")  # Avoid shared memory issues
     options.add_argument("--disable-gpu")  # Fix some headless rendering issues
-    options.add_argument("--remote-debugging-port=9222")  # Ensure debugging port is available
-    options.add_argument("--disable-blink-features=AutomationControlled")  # Avoid detection
+    options.add_argument(
+        "--remote-debugging-port=9222"
+    )  # Ensure debugging port is available
+    options.add_argument(
+        "--disable-blink-features=AutomationControlled"
+    )  # Avoid detection
     options.add_argument("--disable-infobars")
     options.add_argument("--disable-popup-blocking")
     return options

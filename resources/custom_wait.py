@@ -1,13 +1,12 @@
-"""
-Module for custom waits functionality
-Also could be present some custom conditions for extend functionality"""
-
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 
 
 class CustomWait:
-    """Realization of custom wait. Useful in case when we need some specific waiters"""
+    """
+    Class for custom waits functionality
+    Also could be present some custom conditions for extending
+    """
 
     def __init__(self, driver):
         self.driver = driver

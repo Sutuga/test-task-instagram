@@ -38,7 +38,7 @@ pipenv run pytest tests\test_home_task.py -v
 ```
 
 ### Caveats
-The tests did not anticipate additional authorization or approval dialogs during the Gmail login process.
-A new Gmail user account was created specifically for testing purposes.
-Therefore, there is a possibility that Google may present additional screens or require an authorization step for the new account.
+The tests did not anticipate additional authorization or approval dialogs during the Instagram login process.
+A new Instagram user account was created specifically for testing purposes.
+Therefore, there is a possibility that Instagram may present additional screens or require an authorization step for the new account.
 Please ensure you can log in to the user account without encountering any additional steps.
