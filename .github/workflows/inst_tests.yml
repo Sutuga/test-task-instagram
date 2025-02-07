@@ -1,0 +1,62 @@
+name: Run Automated Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3'
+
+      - name: Install Pipenv
+        run: pip install pipenv
+
+      - name: Install Dependencies
+        run: pipenv install --dev
+
+      - name: Install Chrome and WebDriver
+        run: |
+          sudo apt-get install -y wget curl
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install Node.js and npm
+        run: |
+          sudo apt install -y nodejs
+          sudo apt install -y npm
+
+      - name: Install Allure CLI
+        run: npm install -g allure-commandline --save-dev
+
+      - name: Run Tests with Pytest
+        run: pipenv run test_ci
+
+      - name: Check Allure Results
+        if: always()
+        run: ls -la allure-results
+
+      - name: Generate Allure Report
+        if: always()  # Ensures this step runs even if the previous step fails
+        run: allure generate allure-results --clean -o allure-report
+
+      - name: Upload Allure Report as Artifact
+        if: always()  # Ensures this step runs even if tests fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report
