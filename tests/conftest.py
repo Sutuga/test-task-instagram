@@ -1,5 +1,6 @@
 """provided basic functionality for tests suites"""
 
+import allure
 import pytest
 
 from selenium.webdriver import Chrome
