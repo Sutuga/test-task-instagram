@@ -11,8 +11,8 @@ disable = [
 [tool.black]
 line-length = 90
 
-#[tool.pytest.ini_options]
-#addopts = [
-#    "--alluredir", "allure-results",
-#    "--clean-alluredir"
-#]
+[tool.pytest.ini_options]
+addopts = [
+    "--alluredir", "allure-results",
+    "--clean-alluredir"
+]
