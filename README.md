@@ -34,7 +34,7 @@
 ### Run tests
 
 ```
-pipenv run pytest tests\test_home_task.py -v
+pipenv run pytest tests -v
 ```
 
 ### Caveats
