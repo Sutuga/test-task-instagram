@@ -1,4 +1,4 @@
-# Cyberhaven QA automation challenge
+# Test Task
 
 ---
 
